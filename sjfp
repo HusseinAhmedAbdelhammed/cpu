@@ -1,0 +1,171 @@
+
+package javaapplication64;
+import java.util.Scanner;
+import jdk.nashorn.internal.objects.Global;
+class t{
+  Scanner in = new Scanner(System.in); 
+int n;
+int Bu[]=new int[20];
+
+   float Awt;
+  void Getdata(){
+            int i;
+    System.out.println("Enter the no of processes:");
+    // 20 is the maximum 
+    n=in.nextInt();
+  
+    if(n<=20&&n>=0){
+    for(i=1; i<=n; i++)
+    {
+        System.out.println("Enter The BurstTime for Process p" +i+"=	");
+       Bu[i]= in.nextInt();//burst time
+ 
+    }
+    }else{
+        System.out.println("please enter a number below 20 and up to 0");
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+void sjfp2(){
+    
+    System.out.println("hi");
+    
+    
+            //int num=n;
+int B[]=new int[10];//burst time
+float A[] =new float[10];//arrival time
+for(int i=1; i<=n; i++) 
+        {
+        B[i]=Bu[i];
+        System.out.println("Burst time for process p"+i+"=	"+B[i]);
+        
+        }
+for(int i=1; i<=n; i++)
+    {
+       
+        System.out.println("Enter the Arrival Time for"+i+"the process=	");
+       
+        A[i]=in.nextFloat();
+    }
+System.out.println("ch1");
+
+
+class proce{
+
+int bt;
+float at;
+proce(int bt,float at){
+
+this.bt=bt;
+this.at=at;
+
+}
+}
+class imp{
+    void FWT(proce proc[],int ne,int Wt[]){
+    int but[]=new int [ne];
+    for(int i=0;i<ne;i++){
+    but[i]=proc[i].bt;//burst time
+    }
+    int comp=0,t=0,min=Integer.MAX_VALUE;
+    int shortest=0,finT;
+    boolean check=false;
+    while(comp!=ne){System.out.println("butddddd"+but[shortest]);
+    for(int j=0;j<ne;j++){
+    if((proc[j].at <= t)&&(but[j]<min)&& but[j]>0){//arival time
+    min=but[j];
+    shortest=j;
+    check=true;
+    }
+    }
+    if(check==false){
+    t++;
+    continue;
+    }
+    System.out.println("but0"+but[shortest]);
+    but[shortest]--;
+    System.out.println("but1"+but[shortest]);
+    min=but[shortest];
+    if(min==0){
+    min=Integer.MAX_VALUE;
+    }
+    System.out.println("but"+but[shortest]);
+    if(but[shortest]==0){
+        System.out.println(comp);
+        System.out.println("butffff"+but[shortest]);
+    comp++;
+     System.out.println("but"+but[shortest]);
+    System.out.println(comp);
+    check=false;
+    finT=t+1;
+    Wt[shortest]=finT-proc[shortest].bt-(int)proc[shortest].at;//burst and arival
+    if(Wt[shortest]<0){
+    Wt[shortest]=0;
+    }
+    }
+    t++;
+    System.out.println("butaa"+but[shortest]);
+    }
+    }
+    //calcutlate turn around time
+void ftat(proce proc[],int ne,int Wt[],int tat[]){
+    for(int i=0;i<ne;i++){
+    tat[i]=proc[i].bt+Wt[i];//burst time
+    }
+    }
+    //calc average time
+void fat(proce proc[],int ne){
+    int Wt[]=new int[ne],tat[]=new int[ne];
+    int Twt=0,Ttat=0;
+    FWT(proc,ne,Wt);//proce=> burst and arrival
+    ftat(proc,ne,Wt,tat);//proce=> burst and arrival and n
+    System.out.println("Processes"+
+            "Burst time"+
+            "Waiting time"+
+            "Turn around time");
+    for(int i=0;i<ne;i++){
+    Twt=Twt+Wt[i];
+    Ttat=Ttat+tat[i];
+    
+    System.out.println("Average waiting time="+
+            (float)Twt/(float)ne);
+    System.out.println("Average turn around time="+(float)Ttat/(float)ne);
+    }}
+    
+    void drive() {
+        //proce proc[]={new proce(6,1),new proce(8,1),new proce(7,2),new proce(3,3)};//b.a
+        proce proc[]=new proce[n];
+        for(int i=0;i<n;i++){
+        proc[i]=new proce(B[i],A[i]);
+        
+        }
+        
+        fat(proc,proc.length);
+    
+    }
+    
+}
+imp i=new imp();
+i.drive();
+
+
+}}
+public class JavaApplication64 {
+
+   
+    public static void main(String[] args) {
+    t e=new t();
+    e.Getdata();
+    e.sjfp2();
+    }
+    
+}
